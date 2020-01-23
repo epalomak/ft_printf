@@ -1,34 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   headers.h                                          :+:      :+:    :+:   */
+/*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epalomak <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/08 13:17:51 by epalomak          #+#    #+#             */
-/*   Updated: 2020/01/23 15:45:16 by epalomak         ###   ########.fr       */
+/*   Created: 2020/01/23 17:18:52 by epalomak          #+#    #+#             */
+/*   Updated: 2020/01/23 17:19:36 by epalomak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HEADERS_H
-# define HEADERS_H
+#include "headers.h"
+#include <stdio.h>			//REMOVE THIS at somepoint :)
 
-#include <stdarg.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include "./libft/libft.h"
-
-typedef struct		s_tags
+int		check_flags(const char *str, int i, t_tags *head)
 {
-	char			flags[4];
-	int				preci;
-	size_t			i;
-	char			specif;
-	int				negative;
-
-	struct s_tags *next;
-}					t_tags;
-
-int			ft_printf(const char *formt, ...);
-
-#endif
+	while (str[i] == '#')
+	{
+		head->flags[0] = '#';
+		i++;
+	}
+	while (str[i] == '0')
+	{
+		head->flags[1] = '0';
+		i++;
+	}
+	while (str[i] == '-')
+	{
+		head->flags[2] = '-';
+		i++;
+	}
+	while (str[i] == '+')
+	{
+		head->flags[3] = '+';
+		i++;
+	}
+	return (i);
+}
