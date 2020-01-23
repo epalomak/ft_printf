@@ -6,7 +6,7 @@
 /*   By: epalomak <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 13:17:51 by epalomak          #+#    #+#             */
-/*   Updated: 2020/01/21 15:21:54 by epalomak         ###   ########.fr       */
+/*   Updated: 2020/01/23 14:21:40 by epalomak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,17 @@
 #include <stdlib.h>
 #include "./libft/libft.h"
 
-typedef struct		s_flags
+typedef struct		s_tags
 {
-	int			hash;
-	int			zero;
-	int			minus;
-	int 		plus;
-	int 		fwidth;
-	int			prec;
-	int			slenght:
-	int			hh;
-	int			h;
-	int			l;
-	int			ll;
-	int			capl;
-	char		specif;
+	char			flags[4];
+	int				preci;
+	size_t			i;
+	char			specif;
+	int				negative;
 
-	struct s_flags *next;
-}					t_flags;
+	struct s_tags *next;
+}					t_tags;
 
-int			ft_printf(const char * restrict formt, ...);
+int			ft_printf(const char *formt, ...);
 
 #endif
