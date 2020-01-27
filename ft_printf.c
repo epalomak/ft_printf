@@ -6,7 +6,7 @@
 /*   By: epalomak <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 13:35:29 by epalomak          #+#    #+#             */
-/*   Updated: 2020/01/23 17:19:01 by epalomak         ###   ########.fr       */
+/*   Updated: 2020/01/24 15:35:55 by epalomak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,31 +37,6 @@ void	set_tags(t_tags *head)
 	head->negative = 1;
 }
 
-int		check_flags(const char *str, int i, t_tags *head)
-{
-	while (str[i] == '#')
-	{
-		head->flags[0] = '#';
-		i++;
-	}
-	while (str[i] == '0')
-	{
-		head->flags[1] = '0';
-		i++;
-	}
-	while (str[i] == '-')
-	{	
-		head->flags[2] = '-';
-		i++;
-	}
-	while (str[i] == '+')
-	{
-		head->flags[3] = '+';
-		i++;
-	}
-	return (i);
-}
-
 int			ft_printf(const char *formt, ...)
 {
 	char		*tmp;
@@ -80,11 +55,11 @@ int			ft_printf(const char *formt, ...)
 			ft_putchar(formt[i]);
 		else if (formt[i] == '%' && formt [i + 1] != '%')
 		{
-			check_flags(formt, ++i, head);
-		//	check_width_percision(formt, i, head);
-		//	check_specifier(formt, i , head);
-		}
-
+			printf ("%d\n", i);
+			printf("working\n");
+			i = check_flags(formt, ++i, head);	
+			printf ("%d\n", i);
+		}	
 		i++;
 
 	}
@@ -93,7 +68,7 @@ int			ft_printf(const char *formt, ...)
 
 int		main(void)
 {
-	ft_printf("does it work %#0-+");
+	ft_printf("working? %d");
 }
 
 /*
