@@ -1,37 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   headers.h                                          :+:      :+:    :+:   */
+/*   print_c.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epalomak <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/08 13:17:51 by epalomak          #+#    #+#             */
-/*   Updated: 2020/01/27 16:15:49 by epalomak         ###   ########.fr       */
+/*   Created: 2020/01/27 15:41:04 by epalomak          #+#    #+#             */
+/*   Updated: 2020/01/27 16:02:22 by epalomak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HEADERS_H
-# define HEADERS_H
+#include "headers.h"
 
-#include <stdarg.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include "./libft/libft.h"
-
-typedef struct		s_tags
+void	print_c(char c, t_tags *tags)
 {
-	char			flags[5];
-	int				preci;
-	size_t			i;
-	int				negative;
-	int				width;
-	char			*length;
-	va_list			arg;
+	int i;
 
-	struct s_tags *next;
-}					t_tags;
+	i = 0;
+//	if (tags->preci != 0)
+	
+	write(1, c, 1);
+}	
 
-int			ft_printf(const char *formt, ...);
-int			check_tags(const char *str, int i, t_tags *tags);
-
-#endif

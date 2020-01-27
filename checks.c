@@ -6,62 +6,63 @@
 /*   By: epalomak <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 17:18:52 by epalomak          #+#    #+#             */
-/*   Updated: 2020/01/24 15:32:12 by epalomak         ###   ########.fr       */
+/*   Updated: 2020/01/27 16:15:44 by epalomak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers.h"
 #include <stdio.h>			//REMOVE THIS at somepoint :)
 
-static	int		check_specifier(const char *str, int i, t_tags *head)
+static	int		check_specifier(char *str, int i, t_tags *tags)
 {
-	if (str[i] == 'h' || str[i] == 'l' || str[i] == 'L')
-		i++;	
+
 	if (str[i] == 'c')
-		head->specif = 'c';
-	if (str[i] == 's')
-		head->specif = 's';
-	if (str[i] == 'p')
-		head->specif = 'p';
-	if (str[i] == 'd')
-		head->specif = 'd';
-	if (str[i] == 'i')
-		head->specif = 'i';
-	if (str[i] == 'o')
-		head->specif = 'o';
-	if (str[i] == 'u')
-		head->specif = 'u';
-	if (str[i] == 'x')
-		head->specif = 'x';
-	if (str[i] == 'X')
-		head->specif = 'X';
-	printf("4, %d\n", i);
+		print_c(tags);
+//	if (str[i] == 's')
+//		print_s(tags);
+//	if (str[i] == 'p')
+//		print_p(tags);
+//	if (str[i] == 'd')
+//		print_d(tags);
+//	if (str[i] == 'i')
+//		print_i(tags);
+//	if (str[i] == 'o')
+//		print_o(tags);
+//	if (str[i] == 'u')
+//		print_u(tags);
+//	if (str[i] == 'x')
+//		print_x(tags);
+//	if (str[i] == 'X')
+//		print_cap_x(tags);
+//	if (str[i] == 'f')
+//
 	return (i);
 }
 
-static	int		check_length(const char *str, int i, t_tags *head)
+static	int		check_length(char *str, int i, t_tags *tags, va_list ap)
 {
 	if (str[i] == 'h' && str[i + 1] == 'h')
 	{
-		head->length = "hh";
+		tags->length = "hh";
 		i += 2;
 	}
 	else if (str[i] ==  'l' && str[i +1] == 'l')
 	{
-		head->length = "ll";
+		tags->length = "ll";
 		i += 2;
 	}
 	else if (str[i] == 'l')
-		head->length = "l";
+		tags->length = "l";
 	else if (str[i] == 'L')
-		head->length = "L";
+		tags->length = "L";
 	else if (str[i] == 'h')
-		head->length = "h";	
-	printf("3, %d\n", i);
-	return (check_specifier(str, i, head));
+		tags->length = "h";	
+	if (str[i] == 'h' || str[i] == 'l' || str[i] == 'L')
+		i++;	
+	return (check_specifier(str, i, tags, ap));
 }
 
-static	int		get_nbr(const char *str, int i)
+static	int		get_nbr(char *str, int i)
 {
 	int		nbr;
 
@@ -74,48 +75,47 @@ static	int		get_nbr(const char *str, int i)
 	return (nbr);
 }
 
-static	int		check_width_preci(const char *str,int i,t_tags *head)
+static	int		check_width_preci(char *str,int i,t_tags *tags, va_list ap)
 {
 	if (str[i] >= '0' && str[i] <= '9')
-		head->width = get_nbr(str, i);
+		tags->width = get_nbr(str, i);
 	while (str[i] >= '0' && str[i] <= '9')	
 		i++;
 	if (str[i] == '.')
-		head->preci = get_nbr(str, ++i);
+		tags->preci = get_nbr(str, ++i);
 	while (str[i] >= '0' && str[i] <= '9')
 		i++;
 	printf("2, %d\n", i);
-	return (check_length(str, i, head));
+	return (check_length(str, i, tags, ap));
 }
 
-int				check_flags(const char *str, int i, t_tags *head)
+int				check_tags(char *str, int i, t_tags *tags, va_list ap)
 {
 	int		hit;
 
 	hit = i;
 	while (str[i] == '#')
 	{
-		head->flags[0] = '#';
+		tags->flags[0] = '#';
 		i++;
 	}
 	while (str[i] == '0')
 	{
-		head->flags[1] = '0';
+		tags->flags[1] = '0';
 		i++;
 
 	}
 	while (str[i] == '-')
 	{
-		head->flags[2] = '-';
+		tags->flags[2] = '-';
 		i++;
 	}
 	while (str[i] == '+')
 	{
-		head->flags[3] = '+';
+		tags->flags[3] = '+';
 		i++;
 	}
 	if (hit - i != 0)
 		i++;
-	printf("1, %d\n", i);
-	return (check_width_preci(str, i, head));
+	return (check_width_preci(str, i, tags, ap));
 }
