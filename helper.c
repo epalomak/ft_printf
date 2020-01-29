@@ -1,34 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_c.c                                          :+:      :+:    :+:   */
+/*   helper.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epalomak <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/27 15:41:04 by epalomak          #+#    #+#             */
-/*   Updated: 2020/01/29 13:35:59 by epalomak         ###   ########.fr       */
+/*   Created: 2020/01/29 13:25:15 by epalomak          #+#    #+#             */
+/*   Updated: 2020/01/29 13:42:37 by epalomak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers.h"
 
-void	print_c(t_tags *tags)
+t_tags 		*tap_flags(char *str, t_tags *tags)
 {
-	int count;
-	char c;
-
-	count = 0;
-	c = (char)va_arg(tags->arg, int);
-	if (tags->flags[2] == '-')
-		write(1, &c, 1);
-	if (tags->width != 0) 
-	{
-		if (tags->flags[2] == '-' && tags->flags[0] == '0')
-				exit (0);
-		while(++count < tags->width)
-			write(1, &tags->flags[0], 1);
-
-	}
-	else
-		write(1, &c, 1);
+	if(str[tags->i] == '0')
+		tags->flags[0] = '0';
+	if(str[tags->i] == '#')
+		tags->flags[1] = '#';
+	if(str[tags->i] == '-')
+		tags->flags[2] = '-';	
+	if(str[tags->i] == '+')
+		tags->flags[3] = '+';
+	if(str[tags->i] == ' ')
+		tags->flags[4] = ' ';
+	
+	return (tags);
 }
+
+//void       check_flags(t_tags *tags)
+//{
+//   if(tags->flags[0] == '0')
+//}

@@ -6,7 +6,7 @@
 /*   By: epalomak <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 13:35:29 by epalomak          #+#    #+#             */
-/*   Updated: 2020/01/27 16:17:51 by epalomak         ###   ########.fr       */
+/*   Updated: 2020/01/29 13:42:32 by epalomak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	set_tags(t_tags *tags)
 {
-	tags->flags[0] = '\0';
+	tags->flags[0] = ' ';
 	tags->flags[1] = '\0';
 	tags->flags[2] = '\0';
 	tags->flags[3] = '\0';
@@ -23,36 +23,44 @@ void	set_tags(t_tags *tags)
 	tags->preci = 0;
 	tags->negative = 1;
 	tags->length = "\0";
+	tags->width = 0;
 }
 
 int			ft_printf(const char *formt, ...)
 {
 	char		*tmp;
-	va_list		ap;
-	int			i;
 	t_tags		*tags;
 
 	if (!(tags = (t_tags*)malloc(sizeof(t_tags))))
 		return (0);
-	set_tags(tags);
-	va_start(ap, formt);
-	i = 0;
-	while(formt[i] != '\0')
+	tags->i = 0;
+	va_start(tags->arg, formt);
+	while(formt[tags->i] != '\0')
 	{
-		if (formt[i] == '%' && formt [i + 1] != '%')
+		if (formt[tags->i] != '%')
+			ft_putchar(formt[tags->i]);
+		if (formt[tags->i] == '%' && formt [tags->i + 1] != '%')
 		{
-			i = check_tags((char *)formt, ++i, tags);
-			
+
+			set_tags(tags);
+		//	printf("1. %zu\n", tags->i);
+			check_tags((char *)formt, tags);
+		//	printf("5.%zu\n", tags->i);
+		//	printf("6.%d\n", tags->width);
 		}
-		i++;
+		tags->i++;
 	}
+	va_end(tags->arg);
 	return(0);
 }
 
 int		main(void)
 {
-	ft_printf("working? %d");
+	char a = 'y';
+	ft_printf("it works[%-4c]\n", a);
+	printf("it works[%-4c]\n", a);
 }
+
 
 /*
  * intmax_t can take integer of any length
