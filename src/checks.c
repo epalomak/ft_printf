@@ -84,10 +84,12 @@ static	t_tags		*check_width_preci(char *str, t_tags *tags)
 	while (str[tags->i] >= '0' && str[tags->i] <= '9')	
 		tags->i++;
 	if (str[tags->i] == '.')
+	{
+		tags->i++;
 		tags->preci = get_nbr(str, tags);
+	}
 	while (str[tags->i] >= '0' && str[tags->i] <= '9')
 		tags->i++;
-	//printf("3.%zu\n", tags->i);
 	return (check_length(str, tags));
 }
 

@@ -12,17 +12,18 @@
 
 NAME = libftprintf.a
 
-SRC = *.c
+SRC = src/*.c libft/libft.a
 
 OBJ = *.c
 
 FLAGS = -Wall -Wextra -Werror
 
+HEADER = headers.h
+
 all: $(NAME)
 
 $(NAME):
-	gcc -c $(FLAGS) $(SRC)
-	ar	rc $(NAME) $(OBJ)
+	gcc $(SRC) $(HEADER)
 
 clean:
 	/bin/rm -f *.o
@@ -31,3 +32,6 @@ fclean: clean
 	/bin/rm -f $(NAME)
 
 re: fclean all
+
+run: $(NAME)
+	./a.out
