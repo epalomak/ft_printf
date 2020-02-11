@@ -52,6 +52,8 @@ char    *zero_str(t_tags *tags, int count, char *str)
 
     i = 0;
     dst = ft_strnew(tags->preci - count + 1);
+    if (tags->flags[4] == ' ')
+        dst[i++] = ' ';
     if (tags->negative == -1)
         dst[i++] = '-';
     while(count++ < tags->preci)
@@ -71,7 +73,7 @@ void	print_d(t_tags *tags)                       // doesn't work with + flag
         p = zero_str(tags, ft_strlen(str), str);
         str = ft_strjoin(p, str);
     }
-    if (tags->flags[3] == '+')
+    if (tags->flags[3] == '+' && tags->negative != -1)
         str = put_plus(str);
     count = ft_strlen(str) + 1;
     if (tags->flags[2] == '-')
