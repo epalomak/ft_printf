@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_c.c                                          :+:      :+:    :+:   */
+/*   print_p.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epalomak <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/27 15:41:04 by epalomak          #+#    #+#             */
-/*   Updated: 2020/01/29 13:35:59 by epalomak         ###   ########.fr       */
+/*   Created: 2020/01/30 15:40:04 by epalomak          #+#    #+#             */
+/*   Updated: 2020/01/30 15:40:07 by epalomak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"../headers.h"
+#include "../headers.h"
 
-void	print_c(t_tags *tags)
+
+void	print_p(t_tags *tags)
 {
-	int count;
-	char c;
+    int  count;
+    int  add;     
+    char *str;
 
-	count = 0;
-	c = (char)va_arg(tags->arg, int);
-	if (tags->flags[2] == '-')
-		write(1, &c, 1);
-	if (tags->width != 0) 
-	{
-		while(++count < tags->width)
-			write(1, &tags->flags[0], 1);
-		if(tags->flags[2] != '-')
-			write(1, &c, 1);
+    add = (int)va_arg(tags->arg, void*);
+    str = ft_itoa_base(add);
+    count = 0;
+    ft_putstr("0x");
+    ft_putstr(str);
 
-	}
-	else
-		write(1, &c, 1);
 }

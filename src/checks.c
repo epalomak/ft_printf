@@ -22,8 +22,8 @@ static	t_tags	*check_specifier(char *str, t_tags *tags)
 		print_s(tags);
 //	if (str[tags->i] == 'p')
 //		print_p(tags);
-//	if (str[tags->i] == 'd')
-//		print_d(tags);
+	if (str[tags->i] == 'd')
+		print_d(tags);
 //	if (str[tags->i] == 'i')
 //		print_i(tags);
 //	if (str[tags->i] == 'o')
@@ -83,6 +83,7 @@ static	t_tags		*check_width_preci(char *str, t_tags *tags)
 		tags->width = get_nbr(str, tags);
 	while (str[tags->i] >= '0' && str[tags->i] <= '9')	
 		tags->i++;
+	//printf("1.\n");
 	if (str[tags->i] == '.')
 	{
 		tags->i++;
@@ -90,6 +91,7 @@ static	t_tags		*check_width_preci(char *str, t_tags *tags)
 	}
 	while (str[tags->i] >= '0' && str[tags->i] <= '9')
 		tags->i++;
+	//printf("2.\n");
 	return (check_length(str, tags));
 }
 
@@ -102,6 +104,8 @@ t_tags				*check_tags(char *str, t_tags *tags)
 		tap_flags(str, tags);
 		tags->i++;
 	}
+	if(tags->flags[2] == '-')
+		tags->flags[0] = ' ';
 	//printf("2.%zu\n",tags->i);
 	return (check_width_preci(str, tags));
 }

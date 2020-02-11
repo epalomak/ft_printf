@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../headers.h"
-#include <stdio.h>			//REMOVE THIS at somepoint :)
 
 void	set_tags(t_tags *tags)
 {
@@ -56,9 +55,10 @@ int			ft_printf(const char *formt, ...)
 
 int		main(void)
 {
-	char *a = "right?";
-	ft_printf("it works[%10s] or [%s]\n", a, "does it?");
-	printf("it works[%10s]\n", a);
+	char *c = "heiii!";
+	int p = 1243;
+	ft_printf("it works[%+10.10d]\n", p);
+	printf("it works[%+10.10d]\n", p);
 }
 
 
@@ -75,5 +75,6 @@ int		main(void)
  *	flag[4] = ' '
  *
  *	in test main print return value and do this printf("[%-4s]") so you can easily see the spaces.
+ * 
  * 
  * */

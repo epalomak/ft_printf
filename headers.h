@@ -16,6 +16,8 @@
 #include <stdarg.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <stdio.h>					//  !!!! Remove this before submission !!!!
+#include <string.h>
 #include "./libft/libft.h"
 
 typedef struct		s_tags
@@ -36,6 +38,9 @@ typedef struct		s_tags
 int			ft_printf(const char *formt, ...);
 t_tags		*check_tags(char *str, t_tags *tags);
 void		print_c(t_tags *tags);
+void		print_s(t_tags *tags);
+void		print_p(t_tags *tags);
+void		print_d(t_tags *tags);
 t_tags 		*tap_flags(char *str, t_tags *tags);
 
 #endif

@@ -24,7 +24,7 @@ t_tags 		*tap_flags(char *str, t_tags *tags)
 		tags->flags[3] = '+';
 	if(str[tags->i] == ' ')
 		tags->flags[4] = ' ';
-	
+
 	return (tags);
 }
 
