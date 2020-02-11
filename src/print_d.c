@@ -12,7 +12,7 @@
 
 #include	"../headers.h"
 
-char    *put_plus(char *str)
+char    *check_rest_flags(char *str, t_tags *tags)
 {
     char    *dst;
     int    i;
@@ -21,7 +21,11 @@ char    *put_plus(char *str)
     i = 0;
     j= 0;
     dst = ft_strnew(ft_strlen(str) + 1);
-    dst[i++] = '+';
+  //  printf("%d\n", tags->negative);
+    if(tags->flags[4] == ' ' && tags->negative != -1 && tags->flags[3] != '+')
+        dst[i++] = ' ';
+    if(tags->flags[3] == '+' && tags->negative != -1)
+        dst[i++] = '+';
     while (str[j] != '\0')
         dst[i++] = str[j++];
     return (dst);
@@ -33,6 +37,8 @@ char    *create_str(int src, t_tags *tags)
 
     if (tags->preci == 0)
     {
+        if (src < 0)
+            tags->negative = -1;
         dst = ft_itoa(src);
         return (dst);
     }
@@ -52,8 +58,6 @@ char    *zero_str(t_tags *tags, int count, char *str)
 
     i = 0;
     dst = ft_strnew(tags->preci - count + 1);
-    if (tags->flags[4] == ' ')
-        dst[i++] = ' ';
     if (tags->negative == -1)
         dst[i++] = '-';
     while(count++ < tags->preci)
@@ -73,8 +77,7 @@ void	print_d(t_tags *tags)                       // doesn't work with + flag
         p = zero_str(tags, ft_strlen(str), str);
         str = ft_strjoin(p, str);
     }
-    if (tags->flags[3] == '+' && tags->negative != -1)
-        str = put_plus(str);
+    str = check_rest_flags(str, tags);
     count = ft_strlen(str) + 1;
     if (tags->flags[2] == '-')
         ft_putstr(str);
