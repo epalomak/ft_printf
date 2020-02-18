@@ -15,14 +15,13 @@
 
 void	print_p(t_tags *tags)
 {
-    int  count;
-    int  add;     
-    char *str;
+    int      add;     
+    char    *str;
+    int     i;
 
-    add = (int)va_arg(tags->arg, void*);
-    str = ft_itoa_base(add);
-    count = 0;
-    ft_putstr("0x");
+    i = 0;
+    add = va_arg(tags->arg, int);
+    str = ft_itoa_base(add, 16);
+    write(1, "0x10", 5);
     ft_putstr(str);
-
 }

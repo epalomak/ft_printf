@@ -20,8 +20,8 @@ static	t_tags	*check_specifier(char *str, t_tags *tags)
 		print_c(tags);
 	if (str[tags->i] == 's')
 		print_s(tags);
-//	if (str[tags->i] == 'p')
-//		print_p(tags);
+	if (str[tags->i] == 'p')
+		print_p(tags);
 	if (str[tags->i] == 'd')
 		print_d(tags);
 //	if (str[tags->i] == 'i')

@@ -55,10 +55,10 @@ int			ft_printf(const char *formt, ...)
 
 int		main(void)
 {
-	char *c = "heiii!";
-	int p = 1243;
-	ft_printf("it works[%+10.10d]\n", p);
-	printf("it works[%+10.10d]\n", p);
+	char *c = "he";
+	void *p = c;
+	ft_printf("it works[%p]\n", p);
+	printf("it works[%p]\n", p);
 }
 
 

@@ -42,5 +42,6 @@ void		print_s(t_tags *tags);
 void		print_p(t_tags *tags);
 void		print_d(t_tags *tags);
 t_tags 		*tap_flags(char *str, t_tags *tags);
+char    	*ft_itoa_base(int src, int base);
 
 #endif

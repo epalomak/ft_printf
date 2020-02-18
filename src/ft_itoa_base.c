@@ -10,4 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include    "../headers.h"
 
+char    *ft_itoa_base(int src, int base)
+{
+    char        *base_tab;
+    char       	*dst;
+	static char	buf[66];
+
+	dst = &buf[65];
+	base_tab = "0123456789abcdef";
+	*dst = '\0';
+	if (src == 0)
+		dst[0] = '0';
+	while (src != 0)
+	{
+		*--dst = base_tab[src % base];	
+		src /= base;
+	}
+	return(dst);
+}
