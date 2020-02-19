@@ -27,8 +27,3 @@ t_tags 		*tap_flags(char *str, t_tags *tags)
 
 	return (tags);
 }
-
-//void       check_flags(t_tags *tags)
-//{
-//   if(tags->flags[0] == '0')
-//}

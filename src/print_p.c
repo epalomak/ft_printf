@@ -12,16 +12,25 @@
 
 #include "../headers.h"
 
-
-void	print_p(t_tags *tags)
+void	print_p(t_tags *tags)               
 {
-    int      add;     
+    int     add;     
     char    *str;
     int     i;
 
     i = 0;
     add = va_arg(tags->arg, int);
-    str = ft_itoa_base(add, 16);
-    write(1, "0x10", 5);
-    ft_putstr(str);
+    str = ft_strjoin("0x10", ft_itoa_base(add, 16, 0));
+    i = ft_strlen(str);
+    if (tags->flags[2] == '-')
+        ft_putstr(str);
+    if (tags->width != 0) 
+	{
+		while (i++ < tags->width)
+			write(1, &tags->flags[0], 1);
+		if (tags->flags[2] != '-')
+	    	ft_putstr(str);
+	}
+	else if(tags->flags[2] != '-')
+		ft_putstr(str);
 }

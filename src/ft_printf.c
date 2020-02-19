@@ -42,10 +42,7 @@ int			ft_printf(const char *formt, ...)
 		{
 
 			set_tags(tags);
-		//	printf("1. %zu\n", tags->i);
 			check_tags((char *)formt, tags);
-		//	printf("5.%zu\n", tags->i);
-		//	printf("6.%d\n", tags->width);
 		}
 		tags->i++;
 	}
@@ -55,10 +52,10 @@ int			ft_printf(const char *formt, ...)
 
 int		main(void)
 {
-	char *c = "he";
-	void *p = c;
-	ft_printf("it works[%p]\n", p);
-	printf("it works[%p]\n", p);
+	unsigned int	i = 456123;		
+	void 	*p = "sda";
+	ft_printf("it works[%.2o]\n", i);
+	printf("it works[%.2o]\n", i);
 }
 
 

@@ -26,8 +26,8 @@ static	t_tags	*check_specifier(char *str, t_tags *tags)
 		print_d(tags);
 //	if (str[tags->i] == 'i')
 //		print_i(tags);
-//	if (str[tags->i] == 'o')
-//		print_o(tags);
+	if (str[tags->i] == 'o')
+		print_o(tags);
 //	if (str[tags->i] == 'u')
 //		print_u(tags);
 //	if (str[tags->i] == 'x')
@@ -60,7 +60,6 @@ static t_tags		*check_length(char *str,t_tags *tags)
 		tags->length = "h";	
 	if (str[tags->i] == 'h' || str[tags->i] == 'l' || str[tags->i] == 'L')
 		tags->i++;
-	//printf("4.%zu\n", tags->i);
 	return (check_specifier(str, tags));
 }
 

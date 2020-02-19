@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_d.c                                          :+:      :+:    :+:   */
+/*   print_o.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epalomak <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/04 14:48:31 by epalomak          #+#    #+#             */
-/*   Updated: 2020/02/04 14:48:33 by epalomak         ###   ########.fr       */
+/*   Created: 2020/02/19 12:41:05 by epalomak          #+#    #+#             */
+/*   Updated: 2020/02/19 12:41:07 by epalomak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"../headers.h"
+#include "../headers.h"
 
 static char    *check_rest_flags(char *str, t_tags *tags)
 {
@@ -38,7 +38,7 @@ static char    *create_str(int src, t_tags *tags)
     {
         if (src < 0)
             tags->negative = -1;
-        dst = ft_itoa(src);
+        dst = ft_itoa_base(src, 8, 0);
         return (dst);
     }
     if (src < 0)
@@ -46,7 +46,7 @@ static char    *create_str(int src, t_tags *tags)
         src *= -1;
         tags->negative = -1;
     }
-    dst = ft_itoa(src);
+    dst = ft_itoa_base(src, 8, 0);
     return (dst);
 }
 
@@ -64,7 +64,7 @@ static char    *zero_str(t_tags *tags, int count, char *str)
     return (dst);
 }
 
-void	print_d(t_tags *tags)
+void	print_o(t_tags *tags) 
 {
     int         count;               
     char        *str;
