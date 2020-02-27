@@ -1,41 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_s.c                                          :+:      :+:    :+:   */
+/*   print_special.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epalomak <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/29 17:00:57 by epalomak          #+#    #+#             */
-/*   Updated: 2020/01/29 17:00:59 by epalomak         ###   ########.fr       */
+/*   Created: 2020/02/27 15:38:59 by epalomak          #+#    #+#             */
+/*   Updated: 2020/02/27 15:39:03 by epalomak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers.h"
 
-void	print_s(t_tags *tags)
+void	print_special(t_tags *tags)
 {
-	int 	count;
-	char 	*str;
-	char	*dst;
-	int		i;
+	int count;
+	char c;
 
-	i = 0;
-	dst = ft_memalloc(1);
-	str = va_arg(tags->arg, char*);
-	if (tags->preci != 0 && tags->preci <= (int)ft_strlen(str))
-		str = ft_strncpy(dst, str, (size_t)tags->preci);
-	count = ft_strlen(str);
+	count = 0;
+	c = '%';
 	if (tags->flags[2] == '-')
-		ft_putstr(str);
+		write(1, &c, 1);
 	if (tags->width != 0) 
 	{
-		while (count++ < tags->width)
+		while(++count < tags->width)
 			write(1, &tags->flags[0], 1);
-		if (tags->flags[2] != '-')
-	    	ft_putstr(str);
-		count--;
+		if(tags->flags[2] != '-')
+			write(1, &c, 1);
 	}
-	else if(tags->flags[2] != '-')
-		ft_putstr(str);
-	tags->count += count;
+	else
+		write(1, &c, 1);
+    if (count == 0)
+        count++;
+    tags->count += count;
 }

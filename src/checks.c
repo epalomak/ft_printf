@@ -11,43 +11,43 @@
 /* ************************************************************************** */
 
 #include "../headers.h"
-#include <stdio.h>			//REMOVE THIS at somepoint :)
 
-static	t_tags	*check_specifier(char *str, t_tags *tags)
+static	t_tags		*check_specifier(char *str, t_tags *tags)
 {
-
 	if (str[tags->i] == 'c')
 		print_c(tags);
 	if (str[tags->i] == 's')
 		print_s(tags);
 	if (str[tags->i] == 'p')
 		print_p(tags);
-	if (str[tags->i] == 'd')
+	if (str[tags->i] == 'd' || str[tags->i] == 'i')
 		print_d(tags);
-//	if (str[tags->i] == 'i')
-//		print_i(tags);
 	if (str[tags->i] == 'o')
 		print_o(tags);
-//	if (str[tags->i] == 'u')
-//		print_u(tags);
-//	if (str[tags->i] == 'x')
-//		print_x(tags);
-//	if (str[tags->i] == 'X')
-//		print_cap_x(tags);
-//	if (str[tags->i] == 'f')
-//		print_f(tags);
-
+	if (str[tags->i] == 'u')
+		print_u(tags);
+	if (str[tags->i] == 'x')
+		print_x(tags);
+	if (str[tags->i] == 'X')
+	{
+		tags->upp = 1;
+		print_x(tags);
+	}
+	if (str[tags->i] == 'f')
+		print_f(tags);
+	if (str[tags->i] == '%')
+		print_special(tags);
 	return (tags);
 }
 
-static t_tags		*check_length(char *str,t_tags *tags)
+static	t_tags		*check_length(char *str, t_tags *tags)
 {
 	if (str[tags->i] == 'h' && str[tags->i + 1] == 'h')
 	{
 		tags->length = "hh";
 		tags->i += 2;
 	}
-	else if (str[tags->i] ==  'l' && str[tags->i +1] == 'l')
+	else if (str[tags->i] == 'l' && str[tags->i + 1] == 'l')
 	{
 		tags->length = "ll";
 		tags->i += 2;
@@ -57,13 +57,13 @@ static t_tags		*check_length(char *str,t_tags *tags)
 	else if (str[tags->i] == 'L')
 		tags->length = "L";
 	else if (str[tags->i] == 'h')
-		tags->length = "h";	
+		tags->length = "h";
 	if (str[tags->i] == 'h' || str[tags->i] == 'l' || str[tags->i] == 'L')
 		tags->i++;
 	return (check_specifier(str, tags));
 }
 
-static int		get_nbr(char *str, t_tags *tags)
+static int			get_nbr(char *str, t_tags *tags)
 {
 	int		nbr;
 
@@ -80,9 +80,8 @@ static	t_tags		*check_width_preci(char *str, t_tags *tags)
 {
 	if (str[tags->i] >= '0' && str[tags->i] <= '9')
 		tags->width = get_nbr(str, tags);
-	while (str[tags->i] >= '0' && str[tags->i] <= '9')	
+	while (str[tags->i] >= '0' && str[tags->i] <= '9')
 		tags->i++;
-	//printf("1.\n");
 	if (str[tags->i] == '.')
 	{
 		tags->i++;
@@ -90,21 +89,19 @@ static	t_tags		*check_width_preci(char *str, t_tags *tags)
 	}
 	while (str[tags->i] >= '0' && str[tags->i] <= '9')
 		tags->i++;
-	//printf("2.\n");
 	return (check_length(str, tags));
 }
 
 t_tags				*check_tags(char *str, t_tags *tags)
 {
 	tags->i++;
-	while (str[tags->i] == '0' || str[tags->i] == '-' || str[tags->i] == '+' 
-			|| str[tags->i] == '#' || str[tags->i] == ' ')  
+	while (str[tags->i] == '0' || str[tags->i] == '-' || str[tags->i] == '+'
+	|| str[tags->i] == '#' || str[tags->i] == ' ')
 	{
 		tap_flags(str, tags);
 		tags->i++;
 	}
-	if(tags->flags[2] == '-')
+	if (tags->flags[2] == '-')
 		tags->flags[0] = ' ';
-	//printf("2.%zu\n",tags->i);
 	return (check_width_preci(str, tags));
 }

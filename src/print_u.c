@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_o.c                                          :+:      :+:    :+:   */
+/*   print_u.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epalomak <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/19 12:41:05 by epalomak          #+#    #+#             */
-/*   Updated: 2020/02/19 12:41:07 by epalomak         ###   ########.fr       */
+/*   Created: 2020/02/20 15:04:27 by epalomak          #+#    #+#             */
+/*   Updated: 2020/02/20 15:04:30 by epalomak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers.h"
+#include	"../headers.h"
 
 static uintmax_t     get_nbr(t_tags *tags)
 {
@@ -24,10 +24,28 @@ static uintmax_t     get_nbr(t_tags *tags)
          nbr = (unsigned long long)(va_arg(tags->arg, unsigned long long int));
     if (ft_strcmp(tags->length, "l") == 0)
         nbr = (unsigned long)(va_arg(tags->arg,unsigned long int));
-    else
+    if (ft_strcmp(tags->length, "\0") == 0)
         nbr = va_arg(tags->arg, unsigned int);
     return (nbr);
 }
+
+/*static char    *check_rest_flags(char *str, t_tags *tags)
+{
+    char    *dst;
+    int    i;
+    int    j;
+
+    i = 0;
+    j= 0;
+    dst = ft_strnew(ft_strlen(str) + 1);
+    if(tags->flags[4] == ' ' && tags->negative != -1 && tags->flags[3] != '+')
+        dst[i++] = ' ';
+    if(tags->flags[3] == '+' && tags->negative != -1)
+        dst[i++] = '+';
+    while (str[j] != '\0')
+        dst[i++] = str[j++];
+    return (dst);
+}*/
 
 static char    *create_str(uintmax_t src, t_tags *tags)
 {
@@ -37,9 +55,7 @@ static char    *create_str(uintmax_t src, t_tags *tags)
     {
         if (src < 0)
             tags->negative = -1;
-        dst = ft_itoa_base(src, 8, 0);
-        if(tags->flags[1] == '#')
-            dst =ft_strjoin("0", dst);
+        dst = ft_uintmax_itoa(src);
         return (dst);
     }
     if (src < 0)
@@ -47,7 +63,7 @@ static char    *create_str(uintmax_t src, t_tags *tags)
         src *= -1;
         tags->negative = -1;
     }
-    dst = ft_itoa_base(src, 8, 0);
+    dst = ft_uintmax_itoa(src);
     return (dst);
 }
 
@@ -65,7 +81,7 @@ static char    *zero_str(t_tags *tags, int count)
     return (dst);
 }
 
-void	print_o(t_tags *tags) 
+void	print_u(t_tags *tags)
 {
     int         count;
     uintmax_t   nbr;
@@ -79,6 +95,7 @@ void	print_o(t_tags *tags)
         p = zero_str(tags, ft_strlen(str));
         str = ft_strjoin(p, str);
     }
+    //str = check_rest_flags(str, tags);
     count = ft_strlen(str);
     if (tags->flags[2] == '-')
         ft_putstr(str);
@@ -88,8 +105,9 @@ void	print_o(t_tags *tags)
 		    write(1, &tags->flags[0], 1); 
         if (tags->flags[2] != '-')
             ft_putstr(str);
+        count--;
 	}
 	else if (tags->flags[2] != '-')
 		ft_putstr(str);
-    tags->count += count;
+     tags->count += count;
 }

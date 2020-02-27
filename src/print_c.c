@@ -27,8 +27,9 @@ void	print_c(t_tags *tags)
 			write(1, &tags->flags[0], 1);
 		if(tags->flags[2] != '-')
 			write(1, &c, 1);
-
+		count--;
 	}
 	else
 		write(1, &c, 1);
+	tags->count += count + 1;
 }

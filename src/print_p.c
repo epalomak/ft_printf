@@ -14,23 +14,23 @@
 
 void	print_p(t_tags *tags)               
 {
-    int     add;     
-    char    *str;
-    int     i;
+    intmax_t    add;     
+    char        *str;
+    int         count;
 
-    i = 0;
     add = va_arg(tags->arg, int);
-    str = ft_strjoin("0x10", ft_itoa_base(add, 16, 0));
-    i = ft_strlen(str);
+    str = ft_strjoin("0x10", ft_intmax_itoa_base(add, 16, 0));
+    count = ft_strlen(str);
     if (tags->flags[2] == '-')
         ft_putstr(str);
     if (tags->width != 0) 
 	{
-		while (i++ < tags->width)
+		while (count++ < tags->width)
 			write(1, &tags->flags[0], 1);
 		if (tags->flags[2] != '-')
 	    	ft_putstr(str);
 	}
 	else if(tags->flags[2] != '-')
 		ft_putstr(str);
+    tags->count += count;
 }

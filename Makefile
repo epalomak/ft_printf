@@ -12,26 +12,39 @@
 
 NAME = libftprintf.a
 
-SRC = src/*.c libft/libft.a
+SRC = ./src/ft_printf.c ./src/checks.c ./src/ft_itoa_base.c ./src/helper.c \
+	./src/print_c.c ./src/print_d.c ./src/print_f.c ./src/print_o.c \
+	./src/print_p.c ./src/print_s.c ./src/print_u.c ./src/print_x.c \
+	./src/print_special.c
 
-OBJ = *.c
+OBJ = ft_printf.o checks.o ft_itoa_base.o helper.o print_c.o print_d.o \
+print_f.o print_o.o print_p.o print_s.o print_u.o print_x.o print_special.o
+
 
 FLAGS = -Wall -Wextra -Werror
 
-HEADER = headers.h
+LIBFT = ./libft/libft.a
+
+INC = headers.h
 
 all: $(NAME)
 
 $(NAME):
-	gcc $(SRC) $(HEADER)
+	@make -C libft
+	@cp $(LIBFT) $(NAME)
+	@gcc -c $(FLAGS) $(SRC) $(INC)
+	@ar rc $(NAME) $(OBJ)
 
 clean:
-	/bin/rm -f *.o
+	@make -C libft clean
+	@/bin/rm -f *.o
 
 fclean: clean
-	/bin/rm -f $(NAME)
+	@make -C libft fclean
+	@/bin/rm -f $(NAME)
 
 re: fclean all
 
 run: $(NAME)
-	./a.out
+	@gcc libftprintf.a
+	@./a.out
