@@ -16,26 +16,26 @@ static	t_tags		*check_specifier(char *str, t_tags *tags)
 {
 	if (str[tags->i] == 'c')
 		print_c(tags);
-	if (str[tags->i] == 's')
+	else if (str[tags->i] == 's')
 		print_s(tags);
-	if (str[tags->i] == 'p')
+	else if (str[tags->i] == 'p')
 		print_p(tags);
-	if (str[tags->i] == 'd' || str[tags->i] == 'i')
+	else if (str[tags->i] == 'd' || str[tags->i] == 'i')
 		print_d(tags);
-	if (str[tags->i] == 'o')
+	else if (str[tags->i] == 'o')
 		print_o(tags);
-	if (str[tags->i] == 'u')
+	else if (str[tags->i] == 'u')
 		print_u(tags);
-	if (str[tags->i] == 'x')
+	else if (str[tags->i] == 'x')
 		print_x(tags);
-	if (str[tags->i] == 'X')
+	else if (str[tags->i] == 'X')
 	{
 		tags->upp = 1;
 		print_x(tags);
 	}
-	if (str[tags->i] == 'f')
+	else if (str[tags->i] == 'f')
 		print_f(tags);
-	if (str[tags->i] == '%')
+	else if (str[tags->i] == '%')
 		print_special(tags);
 	return (tags);
 }
@@ -85,6 +85,7 @@ static	t_tags		*check_width_preci(char *str, t_tags *tags)
 	if (str[tags->i] == '.')
 	{
 		tags->i++;
+		tags->dot = '.';
 		tags->preci = get_nbr(str, tags);
 	}
 	while (str[tags->i] >= '0' && str[tags->i] <= '9')

@@ -12,100 +12,78 @@
 
 #include "../headers.h"
 
-t_tags 		*tap_flags(char *str, t_tags *tags)
+t_tags		*tap_flags(char *str, t_tags *tags)
 {
-	if(str[tags->i] == '0')
+	if (str[tags->i] == '0')
 		tags->flags[0] = '0';
-	if(str[tags->i] == '#')
+	if (str[tags->i] == '#')
 		tags->flags[1] = '#';
-	if(str[tags->i] == '-')
-		tags->flags[2] = '-';	
-	if(str[tags->i] == '+')
+	if (str[tags->i] == '-')
+		tags->flags[2] = '-';
+	if (str[tags->i] == '+')
 		tags->flags[3] = '+';
-	if(str[tags->i] == ' ')
+	if (str[tags->i] == ' ')
 		tags->flags[4] = ' ';
-
 	return (tags);
 }
 
-static int	ft_unb_count(uintmax_t nb)
+int			neg_plus(t_tags *tags, int count)
 {
-	long	c;
-
-	c = 0;
-	if (nb < 0)
-		nb = nb * -1;
-	while (nb >= 10)
+	if ((tags->negative == -1 || tags->flags[3] == '+'))
 	{
-		nb = nb / 10;
-		c++;
+		if (tags->negative != -1 && tags->flags[0] == '0' && tags->preci == 0)
+		{
+			write(1, "+", 1);
+			tags->plus = '+';
+		}
+		else if (tags->flags[0] == '0' && tags->minus != '-' &&
+		(tags->preci > tags->org_strl || tags->preci == 0))
+		{
+			write(1, "-", 1);
+			tags->minus = '-';
+		}
+		if (tags->preci <= tags->org_strl || tags->preci == 0)
+			count++;
 	}
-	return (c + 1);
+	return (count);
 }
 
-static int	ft_nb_count(intmax_t nb)
+int			display_width(t_tags *tags, char *str, int count)
 {
-	long	c;
-
-	c = 0;
-	if (nb < 0)
-		nb = nb * -1;
-	while (nb >= 10)
+	count = neg_plus(tags, count);
+	while (count++ < (tags->width))
 	{
-		nb = nb / 10;
-		c++;
+		if (tags->preci != 0 && tags->preci < tags->width)
+			tags->flags[0] = ' ';
+		write(1, &tags->flags[0], 1);
 	}
-	return (c + 1);
+	if (tags->flags[2] != '-')
+		ft_display(tags, str);
+	count--;
+	return (count);
 }
 
-char		*ft_uintmax_itoa(uintmax_t n)
+void		ft_display(t_tags *tags, char *str)
 {
-	uintmax_t	i;
-	char		*dst;
-
-	i = ft_unb_count(n);
-	if (n < 0)
+	if (tags->negative == -1 && tags->minus != '-')
 	{
-		if (!(dst = ft_strnew(i + 1)))
-			return (NULL);
-		dst[0] = '-';
-		n = -n;
+		write(1, "-", 1);
+		if (tags->width == 0)
+			tags->count++;
 	}
-	else if (!(dst = ft_strnew(i--)))
-		return (NULL);
-	if (n == 0)
-		dst[0] = '0';
-	while (n > 0)
-	{
-		dst[i] = (n % 10) + '0';
-		n = n / 10;
-		i--;
-	}
-	return (dst);
+	ft_putstr(str);
+	free(str);
 }
 
-char		*ft_intmax_itoa(intmax_t n)
+char		*ft_join_free(char *s1, char *s2)
 {
-	intmax_t	i;
-	char		*dst;
+	char	*dst;
 
-	i = ft_nb_count(n);
-	if (n < 0)
-	{
-		if (!(dst = ft_strnew(i + 1)))
-			return (NULL);
-		dst[0] = '-';
-		n = -n;
-	}
-	else if (!(dst = ft_strnew(i--)))
-		return (NULL);
-	if (n == 0)
-		dst[0] = '0';
-	while (n > 0)
-	{
-		dst[i] = (n % 10) + '0';
-		n = n / 10;
-		i--;
-	}
+	dst = ft_strjoin(s1, s2);
+	if (ft_strcmp(s1, "-") != 0 && ft_strcmp(s1, "0x") != 0 &&
+	ft_strcmp(s1, "0x10") != 0 && ft_strcmp(s1, "0X") != 0)
+		free(s1);
+	if (ft_strcmp(s2, ".") != 0)
+		free(s2);
 	return (dst);
 }

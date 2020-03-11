@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include    "../headers.h"
+#include "../headers.h"
 
-static int	ft_ncount(intmax_t nb, int base)
+static	int	ft_ncount(intmax_t nb, int base)
 {
 	size_t	c;
 
@@ -30,7 +30,7 @@ static int	ft_ncount(intmax_t nb, int base)
 	return (c);
 }
 
-static int	ft_un_ncount(uintmax_t nb, int base)
+static	int	ft_un_ncount(uintmax_t nb, int base)
 {
 	size_t	c;
 
@@ -48,16 +48,15 @@ static int	ft_un_ncount(uintmax_t nb, int base)
 	return (c);
 }
 
-char    *ft_intmax_itoa_base(intmax_t src, int base, int uppercase)
+char		*ft_intmax_itoa_base(intmax_t src, int base, int uppercase)
 {
-    char        *base_tab;
-    char       	*dst;
+	char		*base_tab;
+	char		*dst;
 	intmax_t	i;
 
-	if (base < 2 || base > 16)
-		return (0);
 	i = ft_ncount(src, base);
-	dst = (char*)malloc(sizeof(char) * (i + 1));
+	if (base < 2 || base > 16 || !(dst = (char*)malloc(sizeof(char) * (i + 1))))
+		return (0);
 	if (uppercase == 1)
 		base_tab = "0123456789ABCDEF";
 	else
@@ -75,19 +74,18 @@ char    *ft_intmax_itoa_base(intmax_t src, int base, int uppercase)
 		dst[i--] = base_tab[src % base];
 		src /= base;
 	}
-	return(dst);
+	return (dst);
 }
 
-char    *ft_uintmax_itoa_base(uintmax_t src, int base, int uppercase)
+char		*ft_uintmax_itoa_base(uintmax_t src, int base, int uppercase)
 {
-    char        *base_tab;
-    char       	*dst;
+	char		*base_tab;
+	char		*dst;
 	uintmax_t	i;
 
-	if (base < 2 || base > 16)
-		return (0);
 	i = ft_un_ncount(src, base);
-	dst = (char*)malloc(sizeof(char) * (i + 1));
+	if (base < 2 || base > 16 || !(dst = (char*)malloc(sizeof(char) * (i + 1))))
+		return (0);
 	if (uppercase == 1)
 		base_tab = "0123456789ABCDEF";
 	else
@@ -105,19 +103,18 @@ char    *ft_uintmax_itoa_base(uintmax_t src, int base, int uppercase)
 		dst[i--] = base_tab[src % base];
 		src /= base;
 	}
-	return(dst);
+	return (dst);
 }
 
-char    *ft_itoa_base(int src, int base, int uppercase)
+char		*ft_itoa_base(int src, int base, int uppercase)
 {
-    char        *base_tab;
-    char       	*dst;
+	char		*base_tab;
+	char		*dst;
 	int			i;
 
-	if (base < 2 || base > 16)
-		return (0);
 	i = ft_ncount(src, base);
-	dst = (char*)malloc(sizeof(char) * (i + 1));
+	if (base < 2 || base > 16 || !(dst = (char*)malloc(sizeof(char) * (i + 1))))
+		return (0);
 	if (uppercase == 1)
 		base_tab = "0123456789ABCDEF";
 	else
@@ -135,5 +132,5 @@ char    *ft_itoa_base(int src, int base, int uppercase)
 		dst[i--] = base_tab[src % base];
 		src /= base;
 	}
-	return(dst);
+	return (dst);
 }

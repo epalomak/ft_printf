@@ -13,12 +13,12 @@
 #ifndef HEADERS_H
 # define HEADERS_H
 
-#include <stdarg.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>					//  !!!! Remove this before submission !!!!
-#include <string.h>
-#include "./libft/libft.h"
+# include <stdarg.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>					//  !!!! Remove this before submission !!!!
+# include <string.h>
+# include "./libft/libft.h"
 
 typedef struct		s_tags
 {
@@ -26,31 +26,42 @@ typedef struct		s_tags
 	int				preci;
 	size_t			i;
 	int				negative;
+	char			minus;
 	int				width;
 	char			*length;
 	va_list			arg;
-	char			*pchar;
 	int				upp;
 	int				count;
-	struct s_tags *next;
+	char			dot;
+	int				org_strl;
+	char			plus;
+	struct s_tags	*next;
 }					t_tags;
 
-int			ft_printf(const char *formt, ...);
-t_tags		*check_tags(char *str, t_tags *tags);
-void		print_c(t_tags *tags);
-void		print_s(t_tags *tags);
-void		print_p(t_tags *tags);
-void		print_d(t_tags *tags);
-void		print_o(t_tags *tags);
-void		print_x(t_tags *tags); 
-void		print_u(t_tags *tags);
-void      	print_f(t_tags *tags);
-void		print_special(t_tags *tags);
-t_tags 		*tap_flags(char *str, t_tags *tags);
-char    	*ft_intmax_itoa_base(intmax_t src, int base, int uppercase);
-char    	*ft_uintmax_itoa_base(uintmax_t src, int base, int uppercase);
-char    	*ft_itoa_base(int src, int base, int uppercase);
-char		*ft_uintmax_itoa(uintmax_t n);
-char		*ft_intmax_itoa(intmax_t n);
+int					ft_printf(const char *formt, ...);
+int					display_width(t_tags *tags, char *str, int count);
+
+t_tags				*check_tags(char *str, t_tags *tags);
+t_tags				*tap_flags(char *str, t_tags *tags);
+
+void				print_c(t_tags *tags);
+void				print_s(t_tags *tags);
+void				print_p(t_tags *tags);
+void				print_d(t_tags *tags);
+void				print_o(t_tags *tags);
+void				print_x(t_tags *tags);
+void				print_u(t_tags *tags);
+void				print_f(t_tags *tags);
+void				print_special(t_tags *tags);
+void				ft_display(t_tags *tags, char *str);
+
+char				*ft_intmax_itoa_base(intmax_t src, int base, int uppercase);
+char				*ft_uintmax_itoa_base(uintmax_t src, int base,
+int uppercase);
+char				*ft_itoa_base(int src, int base, int uppercase);
+char				*ft_uintmax_itoa(uintmax_t n);
+char				*ft_intmax_itoa(intmax_t n);
+char				*ft_ftoa(long double src, int preci);
+char				*ft_join_free(char *s1, char *s2);
 
 #endif
