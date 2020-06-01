@@ -80,8 +80,8 @@ char		*ft_join_free(char *s1, char *s2)
 	char	*dst;
 
 	dst = ft_strjoin(s1, s2);
-	if (ft_strcmp(s1, "-") != 0 && ft_strcmp(s1, "0x") != 0 &&
-	ft_strcmp(s1, "0x10") != 0 && ft_strcmp(s1, "0X") != 0)
+	if (ft_strcmp(s1, "-") != 0 && ft_strcmp(s1, "0x") != 0
+	 && ft_strcmp(s1, "0X") != 0)
 		free(s1);
 	if (ft_strcmp(s2, ".") != 0)
 		free(s2);

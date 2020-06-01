@@ -20,11 +20,10 @@ void	print_p(t_tags *tags)
 	char		*src;
 	int			count;
 
-	add = va_arg(tags->arg, unsigned int);
-	if (add <= 0)
-		front = "0x";
-	else
-		front = "0x10";
+	add = va_arg(tags->arg, unsigned long);
+	if (add < 0)
+		add *= -1;
+	front = "0x";
 	src = ft_uintmax_itoa_base(add, 16, 0);
 	str = ft_join_free(front, src);
 	if (tags->dot == '.' && tags->preci == 0 && str[0] == '0')

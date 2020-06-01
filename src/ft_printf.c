@@ -47,8 +47,11 @@ int			ft_printf(const char *formt, ...)
 		}
 		if (formt[tags->i] == '%')
 		{
+			if(!formt[tags->i + 1])
+				break;
 			set_tags(tags);
-			check_tags((char *)formt, tags);
+			if (check_tags((char *)formt, tags) == 0)
+				break;
 		}
 		tags->i++;
 	}

@@ -37,6 +37,8 @@ static	t_tags		*check_specifier(char *str, t_tags *tags)
 		print_f(tags);
 	else if (str[tags->i] == '%')
 		print_special(tags);
+	else
+		return(0);
 	return (tags);
 }
 
@@ -60,6 +62,8 @@ static	t_tags		*check_length(char *str, t_tags *tags)
 		tags->length = "h";
 	if (str[tags->i] == 'h' || str[tags->i] == 'l' || str[tags->i] == 'L')
 		tags->i++;
+	if(!(str[tags->i]))
+		return(0);
 	return (check_specifier(str, tags));
 }
 
@@ -90,6 +94,8 @@ static	t_tags		*check_width_preci(char *str, t_tags *tags)
 	}
 	while (str[tags->i] >= '0' && str[tags->i] <= '9')
 		tags->i++;
+	if(!(str[tags->i]))
+		return(0);
 	return (check_length(str, tags));
 }
 
