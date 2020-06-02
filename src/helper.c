@@ -6,7 +6,7 @@
 /*   By: epalomak <epalomak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 13:25:15 by epalomak          #+#    #+#             */
-/*   Updated: 2020/06/01 18:42:59 by epalomak         ###   ########.fr       */
+/*   Updated: 2020/06/02 13:39:23 by epalomak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,12 @@ int			display_width(t_tags *tags, char *str, int count)
 	count = neg_plus(tags, count);
 	while (count++ < (tags->width))
 	{
+		if (tags->flags[4] == ' ')
+		{
+			write(1, " ", 1);
+			tags->flags[4] = '\0';
+			count++;
+		}
 		if (tags->preci != 0 && tags->preci < tags->width)
 			tags->flags[0] = ' ';
 		write(1, &tags->flags[0], 1);

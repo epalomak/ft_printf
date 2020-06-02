@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_d.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epalomak <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: epalomak <epalomak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 14:48:31 by epalomak          #+#    #+#             */
-/*   Updated: 2020/02/04 14:48:33 by epalomak         ###   ########.fr       */
+/*   Updated: 2020/06/02 12:49:32 by epalomak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,7 @@ static	char		*check_rest_flags(char *str, t_tags *tags)
 	dst = ft_strnew(ft_strlen(str) + 1);
 	if (tags->flags[4] == ' ' && tags->negative != -1 && tags->flags[0] != '0'
 	&& tags->plus != '+' && tags->flags[3] != '+')
-	{
 		dst[i++] = ' ';
-		tags->flags[4] = '\0';
-	}
 	if (tags->flags[3] == '+' && tags->negative != -1 && tags->flags[0] != '0')
 	{
 		dst[i++] = '+';
@@ -61,11 +58,6 @@ static	char		*create_str(intmax_t src, t_tags *tags)
 	{
 		src *= -1;
 		tags->negative = -1;
-	}
-	if (tags->preci == 0)
-	{
-		dst = ft_uintmax_itoa(src);
-		return (dst);
 	}
 	dst = ft_uintmax_itoa(src);
 	return (dst);
