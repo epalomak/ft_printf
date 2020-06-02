@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_s.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epalomak <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: epalomak <epalomak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 17:00:57 by epalomak          #+#    #+#             */
-/*   Updated: 2020/01/29 17:00:59 by epalomak         ###   ########.fr       */
+/*   Updated: 2020/06/01 20:38:53 by epalomak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,12 @@ void	print_s(t_tags *tags)
 	int		count;
 	char	*str;
 	char	*dst;
-	int		i;
 
-	i = 0;
 	if ((str = va_arg(tags->arg, char*)) == NULL)
 		str = null_str(str);
 	dst = ft_memalloc(ft_strlen(str));
 	if (tags->dot == '.' && tags->preci < (int)ft_strlen(str))
-	{
 		str = ft_strncpy(dst, (char*)str, (size_t)tags->preci);
-	}
 	count = ft_strlen(str);
 	if (tags->flags[2] == '-')
 		ft_putstr(str);

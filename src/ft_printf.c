@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epalomak <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: epalomak <epalomak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 13:35:29 by epalomak          #+#    #+#             */
-/*   Updated: 2020/01/29 13:42:32 by epalomak         ###   ########.fr       */
+/*   Updated: 2020/06/01 20:20:45 by epalomak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,8 @@ void		set_tags(t_tags *tags)
 	tags->plus = '0';
 }
 
-int			ft_printf(const char *formt, ...)
+void		go_trough(t_tags *tags, const char *formt)
 {
-	t_tags		*tags;
-
-	if (!(tags = (t_tags*)malloc(sizeof(t_tags))))
-		return (0);
-	tags->i = 0;
-	tags->count = 0;
-	va_start(tags->arg, formt);
 	while (formt[tags->i])
 	{
 		if (formt[tags->i] != '%')
@@ -47,14 +40,26 @@ int			ft_printf(const char *formt, ...)
 		}
 		if (formt[tags->i] == '%')
 		{
-			if(!formt[tags->i + 1])
-				break;
+			if (!formt[tags->i + 1])
+				break ;
 			set_tags(tags);
 			if (check_tags((char *)formt, tags) == 0)
-				break;
+				break ;
 		}
 		tags->i++;
 	}
+}
+
+int			ft_printf(const char *formt, ...)
+{
+	t_tags		*tags;
+
+	if (!(tags = (t_tags*)malloc(sizeof(t_tags))))
+		return (0);
+	tags->i = 0;
+	tags->count = 0;
+	va_start(tags->arg, formt);
+	go_trough(tags, formt);
 	va_end(tags->arg);
 	free(tags);
 	return (tags->count);

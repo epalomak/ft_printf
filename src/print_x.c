@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_x.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epalomak <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: epalomak <epalomak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 13:29:22 by epalomak          #+#    #+#             */
-/*   Updated: 2020/02/27 17:53:07 by epalomak         ###   ########.fr       */
+/*   Updated: 2020/06/01 21:14:50 by epalomak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,24 @@ static	char		*create_str(uintmax_t src, t_tags *tags)
 	return (dst);
 }
 
+static int			if_width(t_tags *tags, char *str, int count)
+{
+	if (tags->flags[1] == '#' && tags->flags[0] == '0')
+	{
+		if (tags->upp == 1)
+			write(1, "0X", 2);
+		else
+			write(1, "0x", 2);
+		count += 2;
+	}
+	while (count++ < tags->width)
+		write(1, &tags->flags[0], 1);
+	if (tags->flags[2] != '-')
+		ft_display(tags, str);
+	count--;
+	return (count);
+}
+
 void				print_x(t_tags *tags)
 {
 	int			count;
@@ -101,21 +119,7 @@ void				print_x(t_tags *tags)
 	if (tags->flags[2] == '-')
 		ft_display(tags, str);
 	if (tags->width != 0)
-	{
-		if (tags->flags[1] == '#' && tags->flags[0] == '0')
-		{
-			if (tags->upp == 1)
-				write(1, "0X", 2);
-			else
-				write(1, "0x", 2);
-			count += 2;
-		}
-		while (count++ < tags->width)
-			write(1, &tags->flags[0], 1);
-		if (tags->flags[2] != '-')
-			ft_display(tags, str);
-		count--;
-	}
+		count = if_width(tags, str, count);
 	else if (tags->flags[2] != '-')
 		ft_display(tags, str);
 	tags->count += count;

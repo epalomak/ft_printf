@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epalomak <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: epalomak <epalomak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 13:25:15 by epalomak          #+#    #+#             */
-/*   Updated: 2020/01/29 13:42:37 by epalomak         ###   ########.fr       */
+/*   Updated: 2020/06/01 18:42:59 by epalomak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char		*ft_join_free(char *s1, char *s2)
 
 	dst = ft_strjoin(s1, s2);
 	if (ft_strcmp(s1, "-") != 0 && ft_strcmp(s1, "0x") != 0
-	 && ft_strcmp(s1, "0X") != 0)
+		&& ft_strcmp(s1, "0X") != 0)
 		free(s1);
 	if (ft_strcmp(s2, ".") != 0)
 		free(s2);
