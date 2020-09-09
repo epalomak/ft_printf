@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: epalomak <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: epalomak <epalomak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/08 13:09:45 by epalomak          #+#    #+#              #
-#    Updated: 2020/01/08 13:14:31 by epalomak         ###   ########.fr        #
+#    Updated: 2020/09/09 12:13:08 by epalomak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,19 +34,18 @@ all: $(NAME)
 $(NAME):
 	@make -C libft
 	@cp $(LIBFT) $(NAME)
-	@gcc -c $(FLAGS) $(SRC) $(INC)
-	@ar rc $(NAME) $(OBJ)
+	@gcc -c $(FLAGS) $(SRC) 
+	@ar rc $(NAME) $(OBJ) $(INC)
+	@echo "libftprintf ready"
 
 clean:
 	@make -C libft clean
 	@/bin/rm -f *.o
+	@echo ".o files cleaned"
 
 fclean: clean
 	@make -C libft fclean
 	@/bin/rm -f $(NAME)
+	@echo "libftprintf.a removed"
 
 re: fclean all
-
-run: re
-	@gcc libftprintf.a main.c
-	@./a.out

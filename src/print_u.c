@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_u.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epalomak <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: epalomak <epalomak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 15:04:27 by epalomak          #+#    #+#             */
-/*   Updated: 2020/02/20 15:04:30 by epalomak         ###   ########.fr       */
+/*   Updated: 2020/06/02 16:05:07 by epalomak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static	uintmax_t	get_nbr(t_tags *tags, uintmax_t nbr)
 	return ((uintmax_t)nbr);
 }
 
-char				*create_str(uintmax_t src, t_tags *tags)
+static char			*create_str(uintmax_t src, t_tags *tags)
 {
 	char	*dst;
 

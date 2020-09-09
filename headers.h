@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   headers.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epalomak <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: epalomak <epalomak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 13:17:51 by epalomak          #+#    #+#             */
-/*   Updated: 2020/01/29 13:35:36 by epalomak         ###   ########.fr       */
+/*   Updated: 2020/09/08 13:58:54 by epalomak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <stdio.h>					//  !!!! Remove this before submission !!!!
-# include <string.h>
 # include "./libft/libft.h"
 
 typedef struct		s_tags
@@ -40,6 +38,7 @@ typedef struct		s_tags
 
 int					ft_printf(const char *formt, ...);
 int					display_width(t_tags *tags, char *str, int count);
+int					ft_unb_count(uintmax_t nb);
 
 t_tags				*check_tags(char *str, t_tags *tags);
 t_tags				*tap_flags(char *str, t_tags *tags);

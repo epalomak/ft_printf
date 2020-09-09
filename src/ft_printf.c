@@ -6,13 +6,13 @@
 /*   By: epalomak <epalomak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 13:35:29 by epalomak          #+#    #+#             */
-/*   Updated: 2020/06/01 20:20:45 by epalomak         ###   ########.fr       */
+/*   Updated: 2020/09/08 16:12:34 by epalomak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers.h"
 
-void		set_tags(t_tags *tags)
+static void	set_tags(t_tags *tags)
 {
 	tags->flags[0] = ' ';
 	tags->flags[1] = '\0';
@@ -29,7 +29,7 @@ void		set_tags(t_tags *tags)
 	tags->plus = '0';
 }
 
-void		go_trough(t_tags *tags, const char *formt)
+static void	go_through(t_tags *tags, const char *formt)
 {
 	while (formt[tags->i])
 	{
@@ -59,7 +59,7 @@ int			ft_printf(const char *formt, ...)
 	tags->i = 0;
 	tags->count = 0;
 	va_start(tags->arg, formt);
-	go_trough(tags, formt);
+	go_through(tags, formt);
 	va_end(tags->arg);
 	free(tags);
 	return (tags->count);

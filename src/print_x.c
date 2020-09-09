@@ -6,7 +6,7 @@
 /*   By: epalomak <epalomak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 13:29:22 by epalomak          #+#    #+#             */
-/*   Updated: 2020/06/01 21:14:50 by epalomak         ###   ########.fr       */
+/*   Updated: 2020/09/08 15:07:59 by epalomak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static	char		*create_str(uintmax_t src, t_tags *tags)
 		tags->negative = -1;
 		src *= -1;
 	}
-	if (tags->preci == 0)
+	if (tags->preci == 0 || tags->preci < ft_unb_count(src))
 	{
 		dst = ft_uintmax_itoa_base(src, 16, tags->upp);
 		if (tags->flags[1] == '#' && ft_strcmp(dst, "0") &&
@@ -83,6 +83,8 @@ static	char		*create_str(uintmax_t src, t_tags *tags)
 
 static int			if_width(t_tags *tags, char *str, int count)
 {
+	if (tags->preci != 0)
+		tags->flags[0] = ' ';
 	if (tags->flags[1] == '#' && tags->flags[0] == '0')
 	{
 		if (tags->upp == 1)
@@ -104,17 +106,13 @@ void				print_x(t_tags *tags)
 	int			count;
 	uintmax_t	nbr;
 	char		*str;
-	char		*p;
 
 	nbr = get_nbr(tags, 0);
 	str = create_str(nbr, tags);
 	if (tags->dot == '.' && tags->preci == 0)
 		ft_strclr(str);
 	if (tags->preci != 0 && tags->preci > (int)ft_strlen(str))
-	{
-		p = zero_str(tags, ft_strlen(str));
-		str = ft_join_free(p, str);
-	}
+		str = ft_join_free(zero_str(tags, ft_strlen(str)), str);
 	count = ft_strlen(str);
 	if (tags->flags[2] == '-')
 		ft_display(tags, str);

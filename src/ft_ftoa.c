@@ -3,55 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ftoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epalomak <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: epalomak <epalomak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 15:12:57 by epalomak          #+#    #+#             */
-/*   Updated: 2020/03/05 15:13:03 by epalomak         ###   ########.fr       */
+/*   Updated: 2020/09/08 16:22:13 by epalomak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers.h"
 
-static	int		ft_num_count(long double nb)
+char		*ft_first_part(intmax_t src2, long double src)
 {
-	int	c;
+	char *dst;
 
-	c = 0;
-	if (nb < 0)
-		nb *= -1;
-	while (nb >= 1)
-	{
-		c++;
-		nb /= 10;
-	}
-	return (c);
+	dst = ft_intmax_itoa(src2);
+	if (src < 0 && ft_strcmp("0", dst) == 0)
+		dst = ft_join_free("-", dst);
+	return (dst);
 }
 
-char			*ft_ftoa(long double src, int preci)
+char		*ft_ftoa(long double src, int preci)
 {
 	int			i;
-	int			len;
-	char		*dst;
+	char		*dst1;
+	char		*dst2;
+	char		*final;
 	intmax_t	src2;
 
-	i = 0;
-	dst = (char*)malloc(sizeof(char) * (ft_num_count(src) + preci + 2));
-	if (src < 0)
-	{
-		dst[i++] = '-';
-		src *= -1;
-	}
 	src2 = (intmax_t)src;
-	dst = ft_join_free(dst, ft_intmax_itoa(src2));
-	len = ft_strlen(dst);
-	i = len;
-	dst[i++] = '.';
-	while (i < (preci + len + 1))
+	dst1 = ft_first_part(src2, src);
+	if (src < 0)
+		src *= -1;
+	if (src2 < 0)
+		src2 *= -1;
+	i = 0;
+	dst2 = ft_strnew(preci + 2);
+	dst2[i++] = '.';
+	while (preci-- > 0)
 	{
 		src = (src - (long double)src2) * 10;
 		src2 = (intmax_t)src;
-		dst[i++] = src2 + '0';
+		dst2[i++] = src2 + '0';
 	}
-	dst[i] = '\0';
-	return (dst);
+	final = ft_strjoin(dst1, dst2);
+	free(dst1);
+	free(dst2);
+	return (final);
 }

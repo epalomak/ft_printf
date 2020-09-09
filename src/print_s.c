@@ -6,19 +6,19 @@
 /*   By: epalomak <epalomak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 17:00:57 by epalomak          #+#    #+#             */
-/*   Updated: 2020/06/01 20:38:53 by epalomak         ###   ########.fr       */
+/*   Updated: 2020/06/02 15:48:19 by epalomak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers.h"
 
-char	*null_str(char *str)
+static char	*null_str(char *str)
 {
 	str = "(null)";
 	return (str);
 }
 
-void	print_s(t_tags *tags)
+void		print_s(t_tags *tags)
 {
 	int		count;
 	char	*str;

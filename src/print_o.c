@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_o.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epalomak <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: epalomak <epalomak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 12:41:05 by epalomak          #+#    #+#             */
-/*   Updated: 2020/02/19 12:41:07 by epalomak         ###   ########.fr       */
+/*   Updated: 2020/09/09 12:04:17 by epalomak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,27 +30,24 @@ static	uintmax_t	get_nbr(t_tags *tags, uintmax_t nbr)
 static	char		*create_str(uintmax_t src, t_tags *tags)
 {
 	char	*dst;
+	char	*str;
 
 	if (src < 0)
 	{
 		src *= -1;
 		tags->negative = -1;
 	}
-	if (tags->preci == 0 && tags->dot != '.')
-	{
-		dst = ft_uintmax_itoa_base(src, 8, 0);
-		if (tags->flags[1] == '#' && dst[0] != '0')
-			dst = ft_strjoin("0", dst);
-		return (dst);
-	}
-	if (tags->dot == '.' && tags->preci == 0)
-	{
-		dst = ft_strnew(1);
-		if (tags->flags[1] == '#' && dst[0] != '0')
-			dst[0] = '0';
-		return (dst);
-	}
 	dst = ft_uintmax_itoa_base(src, 8, 0);
+	if ((tags->dot == '.' && tags->preci < ft_unb_count(src)) ||
+	(tags->preci == 0 && tags->dot != '.'))
+	{
+		if (tags->flags[1] == '#' && dst[0] != '0')
+		{
+			str = ft_strjoin("0", dst);
+			free(dst);
+			return (str);
+		}
+	}
 	return (dst);
 }
 

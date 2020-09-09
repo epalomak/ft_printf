@@ -6,11 +6,12 @@
 /*   By: epalomak <epalomak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 13:25:15 by epalomak          #+#    #+#             */
-/*   Updated: 2020/06/02 13:39:23 by epalomak         ###   ########.fr       */
+/*   Updated: 2020/09/08 13:01:55 by epalomak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers.h"
+#include <stdio.h>
 
 t_tags		*tap_flags(char *str, t_tags *tags)
 {
@@ -27,7 +28,7 @@ t_tags		*tap_flags(char *str, t_tags *tags)
 	return (tags);
 }
 
-int			neg_plus(t_tags *tags, int count)
+static int	neg_plus(t_tags *tags, int count)
 {
 	if ((tags->negative == -1 || tags->flags[3] == '+'))
 	{
@@ -85,7 +86,8 @@ char		*ft_join_free(char *s1, char *s2)
 {
 	char	*dst;
 
-	dst = ft_strjoin(s1, s2);
+	if (!(dst = ft_strjoin(s1, s2)))
+		return (0);
 	if (ft_strcmp(s1, "-") != 0 && ft_strcmp(s1, "0x") != 0
 		&& ft_strcmp(s1, "0X") != 0)
 		free(s1);

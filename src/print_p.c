@@ -6,7 +6,7 @@
 /*   By: epalomak <epalomak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 15:40:04 by epalomak          #+#    #+#             */
-/*   Updated: 2020/06/01 21:19:36 by epalomak         ###   ########.fr       */
+/*   Updated: 2020/09/08 15:43:32 by epalomak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void		print_p(t_tags *tags)
 		nbr *= -1;
 	front = "0x";
 	src = ft_uintmax_itoa_base(nbr, 16, 0);
+	if (tags->dot == '.' && tags->preci == 0 && src[0] == '0')
+		ft_strclr(src);
 	str = ft_join_free(front, src);
-	if (tags->dot == '.' && tags->preci == 0 && str[0] == '0')
-		ft_strclr(str);
 	count = ft_strlen(str);
 	if (tags->flags[2] == '-')
 		ft_display(tags, str);

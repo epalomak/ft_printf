@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_uintmax_toa.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epalomak <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: epalomak <epalomak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 10:49:29 by epalomak          #+#    #+#             */
-/*   Updated: 2020/03/03 10:49:32 by epalomak         ###   ########.fr       */
+/*   Updated: 2020/09/08 13:59:45 by epalomak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers.h"
 
-static int	ft_unb_count(uintmax_t nb)
+int			ft_unb_count(uintmax_t nb)
 {
 	long	c;
 
