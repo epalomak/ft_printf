@@ -6,7 +6,7 @@
 /*   By: epalomak <epalomak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 12:39:43 by epalomak          #+#    #+#             */
-/*   Updated: 2020/09/09 12:16:47 by epalomak         ###   ########.fr       */
+/*   Updated: 2020/09/10 17:33:58 by epalomak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	main(void)
 {
-	void *p = NULL;
+	void *p;
 
 		printf("c conversion\n");
 /*1*/ft_printf("{%-5c}\n",'e'); 
@@ -27,12 +27,14 @@ int	main(void)
 		printf("d conversion\n");
 /*1*/ft_printf("{%-12.5d}\n",1234); 
 		printf("{%-12.5d}\n",1234);
-/*2*/ft_printf("{% .2d}\n",-323); 
-		printf("{% .2d}\n",-323);
+/*2*/ft_printf("{% .2d}\n",323); 
+		printf("{% .2d}\n",323);
 /*3*/ft_printf("{%+010d}\n",323);
 		printf("{%+010d}\n",323);
 /*4*/ft_printf("{%ld}\n",4546878785764); 
 		printf("{%ld}\n",4546878785764);
+/*5*/ft_printf("{%hhd}\n",'a');
+		printf("{%hhd}\n",'a');
 		printf("\n");
 
 		printf("o conversion\n");
@@ -42,8 +44,8 @@ int	main(void)
 		printf("{%#10o}\n",323);
 /*3*/ft_printf("{%012o}\n",4546); 	
 		printf("{%012o}\n",4546);
-/*4*/ft_printf("{%uo}\n",'e'); 
-		printf("{%uo}\n",'e');
+/*4*/ft_printf("{%ho}\n",'e'); 
+		printf("{%ho}\n",'e');
 		printf("\n");
 
 		printf("u conversion\n");
@@ -85,12 +87,12 @@ int	main(void)
 /*3*/ft_printf("{%-18p}\n",p);
 		printf("{%-18p}\n",p);
 /*4*/ft_printf("{%-15p}\n", 0);
-	//	printf("{%-15p}\n", 0);
+		printf("{%-15p}\n", 0);
 		printf("\n");
 
 		printf("f conversion\n");
-/*1*/ft_printf("{%f}\n",-0.01235); 
-		printf("{%f}\n",-0.01235);
+/*1*/ft_printf("{%f}\n",-0.0005); 
+		printf("{%f}\n",-0.0005);
 /*2*/ft_printf("{%Lf}\n", 142.24141245l);
 		printf("{%Lf}\n", 142.24141245l);
 /*3*/ft_printf("{%-18f}\n",23.234);
@@ -112,17 +114,15 @@ int	main(void)
 		printf("{%f, %.13f, %#.5x}\n", 1235412341235112.45412341234, 142.24141245, 456);
 /*5*/ft_printf("{%-f, %p, %.4x, %10s, %#.2o}\n", 123451.454, p, 43234, "hellou", 45676);
 		printf("{%-f, %p, %.4x, %10s, %#.2o}\n", 123451.454, p, 43234, "hellou", 45676);
-//	printf("\n");
+	printf("\n");
 
-		//printf("special case\n");
-///*1*/ft_printf("%%\n");
-//		printf("%%\n");
-///*2*/ft_printf("it is working\n");
-//		printf("it is working\n");
-///*3*/ft_printf("%f\n");
-//		printf("%f\n");
-//	ft_printf("{%-15p}\n", 0);
-//	printf("{%-15p}\n", 0); 
+		printf("special case\n");
+/*1*/ft_printf("%%\n");
+		printf("%%\n");
+/*2*/ft_printf("%f\n");
+		printf("%f\n");
+/*3*/ft_printf("%");
+		printf("%");
 	while(1)
 	{
 		
